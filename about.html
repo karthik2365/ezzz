@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#050505">
+  <meta name="description" content="About my interests in machine learning systems, local models, efficient inference, retrieval, and hardware.">
+  <title>About — Machine Learning, from the inside</title>
+  <style>
+    :root { color-scheme: dark; --paper:#050505; --ink:#f5f5f5; --muted:#a1a1a1; --line:#303030; --width:1120px; }
+    * { box-sizing:border-box; }
+    html { scroll-behavior:smooth; }
+    body { margin:0; background:var(--paper); color:var(--ink); font-family:"SFMono-Regular",Consolas,"Liberation Mono",Menlo,monospace; -webkit-font-smoothing:antialiased; }
+    a { color:inherit; }
+    .wrap { width:min(var(--width),calc(100% - 64px)); margin-inline:auto; }
+    .topbar { height:84px; display:flex; align-items:center; justify-content:space-between; border-bottom:1px solid var(--line); font-size:15px; }
+    .wordmark { font-size:20px; font-weight:650; letter-spacing:-.03em; text-decoration:underline; text-decoration-thickness:2px; text-underline-offset:7px; }
+    .nav { display:flex; gap:18px; }
+    .nav a { text-decoration:underline; text-underline-offset:6px; }
+    .eyebrow,.section-label,.index { color:var(--muted); font-family:"SFMono-Regular",Consolas,"Liberation Mono",monospace; font-size:12px; letter-spacing:.08em; }
+    .eyebrow { margin:0 0 26px; }
+    h1 { margin:0 0 55px; font-size:clamp(44px,6vw,76px); font-weight:500; letter-spacing:-.06em; line-height:1.08; }
+    .about { padding:80px 0 90px; display:grid; grid-template-columns:1fr 2fr; gap:50px; }
+    .section-label { margin:7px 0 0; }
+    .about-copy { max-width:740px; }
+    .about-copy p { margin:0 0 24px; color:#dedede; font-size:16px; line-height:1.9; }
+    .about-copy strong { color:var(--ink); font-weight:700; }
+    .focus { padding:0 0 96px; }
+    .focus-heading { display:flex; justify-content:space-between; align-items:baseline; margin-bottom:34px; }
+    h2 { margin:0; font-size:clamp(30px,4vw,44px); font-weight:500; letter-spacing:-.055em; }
+    .focus-list { border-top:1px solid var(--line); }
+    .focus-item { display:grid; grid-template-columns:70px 1fr 1fr; gap:25px; align-items:start; padding:26px 0 29px; border-bottom:1px solid var(--line); }
+    .index { padding-top:5px; }
+    .focus-item h3 { margin:0; font-size:19px; font-weight:500; letter-spacing:-.035em; }
+    .focus-item p { max-width:400px; margin:0; color:var(--muted); font-size:13px; line-height:1.8; }
+    footer { min-height:74px; display:flex; align-items:center; justify-content:space-between; color:var(--muted); font-size:11px; }
+    footer a { text-decoration:none; }
+    @media(max-width:680px) {
+      .wrap { width:min(100% - 40px,var(--width)); }
+      .topbar { height:68px; }
+      .nav { gap:16px; font-size:12px; }
+      .about { padding:60px 0 65px; grid-template-columns:1fr; gap:25px; }
+      .about-copy p { font-size:15px; }
+      .focus { padding-bottom:70px; }
+      .focus-item { grid-template-columns:38px 1fr; gap:12px 16px; }
+      .focus-item p { grid-column:2; }
+      footer { gap:15px; }
+    }
+    @media(prefers-reduced-motion:reduce) { html { scroll-behavior:auto; } }
+  </style>
+</head>
+<body>
+  <header class="wrap topbar">
+    <a class="wordmark" href="index.html">ML / Systems</a>
+    <nav class="nav" aria-label="Main navigation">
+      <a href="index.html">Home</a>
+      <a href="projects.html">Projects</a>
+      <a href="about.html" aria-current="page">About</a>
+    </nav>
+  </header>
+  <main>
+    <div class="wrap" style="padding-top:86px">
+      <p class="eyebrow">A little about how I think</p>
+      <h1>Curious about what’s<br>possible on less.</h1>
+    </div>
+    <section class="wrap about">
+      <p class="section-label">01 / About</p>
+      <div class="about-copy">
+        <p>I’m drawn to <strong>machine learning from a systems perspective</strong>—not just using models, but understanding what makes them work and how far they can be pushed.</p>
+        <p>I spend a lot of time experimenting with <strong>LLMs and SLMs</strong>: running models locally, optimizing inference and memory use, exploring quantization and retrieval, and finding ways to make capable models work within limited hardware.</p>
+        <p>I’m also fascinated by where <strong>software meets the physical world</strong>. I like experimenting with hardware controllers, low-level systems, and unconventional ML ideas—taking things apart, learning how they work, optimizing them, and sometimes building my own version to see how far I can push it.</p>
+      </div>
+    </section>
+    <section class="wrap focus">
+      <div class="focus-heading"><h2>What I’m curious about</h2><span class="section-label">02 / Focus</span></div>
+      <div class="focus-list">
+        <article class="focus-item"><span class="index">01</span><h3>Small models, local inference</h3><p>Exploring what LLMs and SLMs can do on-device, and what it takes to make them useful.</p></article>
+        <article class="focus-item"><span class="index">02</span><h3>Efficiency under constraints</h3><p>Quantization, memory use, inference speed, and the trade-offs behind each optimization.</p></article>
+        <article class="focus-item"><span class="index">03</span><h3>Retrieval and model capability</h3><p>Finding better ways to connect compact models with the knowledge and context they need.</p></article>
+        <article class="focus-item"><span class="index">04</span><h3>Software meets hardware</h3><p>Hardware controllers, low-level systems, and experiments that bring ML into the physical world.</p></article>
+      </div>
+    </section>
+  </main>
+  <footer class="wrap"><a href="index.html">← Home</a><span>Machine learning, from the inside.</span><span>© <span id="year">2026</span></span></footer>
+  <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+</body>
+</html>

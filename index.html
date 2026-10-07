@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f7f7f5">
+  <meta name="description" content="A portfolio exploring machine learning from a systems perspective, efficient local models, and software at the edge of the physical world.">
+  <title>Machine Learning, from the inside</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --paper: #050505;
+      --ink: #f5f5f5;
+      --muted: #a1a1a1;
+      --line: #303030;
+      --soft: #181818;
+      --width: 1120px;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background: var(--paper);
+      color: var(--ink);
+      font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: inherit; }
+    .wrap { width: min(var(--width), calc(100% - 64px)); margin-inline: auto; }
+    .topbar {
+      height: 84px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid var(--line);
+      font-size: 15px;
+    }
+    .wordmark { font-size: 20px; font-weight: 650; letter-spacing: -.03em; text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 7px; }
+    .nav { display: flex; gap: 18px; }
+    .nav a { color: var(--ink); text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 6px; transition: opacity .2s; }
+    .nav a:hover { opacity: .65; }
+    .hero {
+      min-height: 610px;
+      padding: 88px 0 110px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      border-bottom: 0;
+    }
+    .eyebrow, .section-label, .index {
+      color: var(--muted);
+      font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+      font-size: 12px;
+      letter-spacing: .08em;
+      text-transform: none;
+    }
+    .eyebrow { margin: 0 0 34px; }
+    h1 {
+      max-width: 850px;
+      margin: 0;
+      font-size: clamp(44px, 5vw, 66px);
+      font-weight: 500;
+      letter-spacing: -.06em;
+      line-height: 1.12;
+    }
+    .hero-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      gap: 40px;
+      margin-top: 24px;
+    }
+    .intro { max-width: 850px; margin: 0; color: var(--ink); font-size: 17px; line-height: 1.85; }
+    .scroll-link { flex: none; font-size: 12px; text-decoration: underline; text-underline-offset: 5px; }
+    section { border-bottom: 1px solid var(--line); }
+    .about { padding: 46px 0 90px; display: grid; grid-template-columns: 1fr 2fr; gap: 50px; }
+    .section-label { margin: 7px 0 0; }
+    .about-copy { max-width: 680px; }
+    .about-copy p { margin: 0 0 22px; color: #dedede; font-size: 16px; line-height: 1.85; }
+    .about-copy p:last-child { margin-bottom: 0; }
+    .about-copy strong { color: var(--ink); font-weight: 700; }
+    .focus { padding: 90px 0 100px; }
+    .focus-heading { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 43px; }
+    h2 { margin: 0; font-size: clamp(32px, 4vw, 48px); font-weight: 500; letter-spacing: -.055em; }
+    .focus-list { border-top: 1px solid var(--line); }
+    .focus-item {
+      display: grid;
+      grid-template-columns: 70px 1fr 1fr;
+      gap: 25px;
+      align-items: start;
+      padding: 26px 0 29px;
+      border-bottom: 1px solid var(--line);
+    }
+    .index { padding-top: 5px; }
+    .focus-item h3 { margin: 0; font-size: 21px; font-weight: 500; letter-spacing: -.035em; }
+    .focus-item p { max-width: 400px; margin: 0; color: var(--muted); font-size: 13px; line-height: 1.7; }
+    .closing { padding: 100px 0 105px; display: flex; justify-content: space-between; align-items: end; gap: 40px; }
+    .closing h2 { max-width: 620px; font-size: clamp(42px, 6vw, 72px); line-height: 1.04; }
+    .contact { min-width: 135px; padding-bottom: 7px; border-bottom: 1px solid var(--ink); font-size: 14px; text-decoration: none; }
+    footer { min-height: 74px; display: flex; align-items: center; justify-content: space-between; color: var(--muted); font-size: 11px; }
+    footer a { text-decoration: none; }
+    @media (max-width: 680px) {
+      .wrap { width: min(100% - 40px, var(--width)); }
+      .topbar { height: 68px; }
+      .nav { gap: 17px; font-size: 12px; }
+      .hero { min-height: auto; padding: 86px 0 65px; }
+      .hero-bottom { align-items: start; flex-direction: column; gap: 25px; margin-top: 34px; }
+      .intro { font-size: 16px; }
+      .about { padding: 70px 0; grid-template-columns: 1fr; gap: 30px; }
+      .about-copy p { font-size: 17px; }
+      .focus { padding: 70px 0; }
+      .focus-item { grid-template-columns: 38px 1fr; gap: 12px 16px; }
+      .focus-item p { grid-column: 2; }
+      .closing { padding: 75px 0; align-items: start; flex-direction: column; gap: 30px; }
+      footer { gap: 15px; }
+    }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } *, *::before, *::after { transition-duration: .01ms !important; } }
+  </style>
+</head>
+<body>
+  <header class="wrap topbar">
+    <a class="wordmark" href="#top">ML / Systems</a>
+    <nav class="nav" aria-label="Main navigation">
+      <a href="index.html" aria-current="page">Home</a>
+      <a href="projects.html">Projects</a>
+      <a href="about.html">About</a>
+    </nav>
+  </header>
+
+  <main id="top">
+    <div class="wrap hero">
+      <p class="eyebrow">Machine learning · systems · the physical world</p>
+      <h1>Hello there.</h1>
+      <div class="hero-bottom">
+        <p class="intro">I explore machine learning from a systems perspective: how models work, how to run them efficiently on limited hardware, and what happens when software meets the physical world.</p>
+        <a class="scroll-link" href="about.html">More about me →</a>
+      </div>
+    </div>
+  </main>
+
+  <footer class="wrap">
+    <span>Machine learning, from the inside.</span>
+    <a href="about.html">About →</a>
+    <span>© <span id="year">2026</span></span>
+  </footer>
+  <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+</body>
+</html>

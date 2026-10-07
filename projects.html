@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#050505">
+  <meta name="description" content="Projects and experiments in local machine learning, efficient inference, retrieval, and hardware.">
+  <title>Projects — Machine Learning, from the inside</title>
+  <style>
+    :root { color-scheme:dark; --paper:#050505; --ink:#f5f5f5; --muted:#a1a1a1; --line:#303030; --width:1120px; }
+    * { box-sizing:border-box; }
+    body { margin:0; background:var(--paper); color:var(--ink); font-family:"SFMono-Regular",Consolas,"Liberation Mono",Menlo,monospace; -webkit-font-smoothing:antialiased; }
+    a { color:inherit; }
+    .wrap { width:min(var(--width),calc(100% - 64px)); margin-inline:auto; }
+    .topbar { height:84px; display:flex; align-items:center; justify-content:space-between; border-bottom:1px solid var(--line); font-size:15px; }
+    .wordmark { font-size:20px; font-weight:650; letter-spacing:-.03em; text-decoration:underline; text-decoration-thickness:2px; text-underline-offset:7px; }
+    .nav { display:flex; gap:18px; }
+    .nav a { text-decoration:underline; text-underline-offset:6px; }
+    .eyebrow,.section-label { color:var(--muted); font-size:12px; letter-spacing:.08em; }
+    main { min-height:calc(100vh - 158px); padding-top:86px; }
+    .eyebrow { margin:0 0 26px; }
+    h1 { margin:0; font-size:clamp(44px,6vw,76px); font-weight:500; letter-spacing:-.06em; line-height:1.08; }
+    .intro { max-width:740px; margin:28px 0 76px; color:#dedede; font-size:16px; line-height:1.9; }
+    .project-list { border-top:1px solid var(--line); }
+    .project { display:grid; grid-template-columns:70px 1fr 1.3fr; gap:25px; padding:27px 0; border-bottom:1px solid var(--line); }
+    .number { color:var(--muted); font-size:12px; }
+    h2 { margin:0; font-size:19px; font-weight:500; letter-spacing:-.03em; }
+    .project p { margin:0; color:var(--muted); font-size:13px; line-height:1.8; }
+    footer { min-height:74px; display:flex; align-items:center; justify-content:space-between; color:var(--muted); font-size:11px; }
+    footer a { text-decoration:none; }
+    @media(max-width:680px) {
+      .wrap { width:min(100% - 40px,var(--width)); }
+      .topbar { height:68px; }
+      .nav { gap:12px; font-size:11px; }
+      main { padding-top:65px; }
+      .intro { margin-bottom:55px; font-size:15px; }
+      .project { grid-template-columns:38px 1fr; gap:12px 16px; }
+      .project p { grid-column:2; }
+      footer { gap:15px; }
+    }
+  </style>
+</head>
+<body>
+  <header class="wrap topbar">
+    <a class="wordmark" href="index.html">ML / Systems</a>
+    <nav class="nav" aria-label="Main navigation">
+      <a href="index.html">Home</a>
+      <a href="projects.html" aria-current="page">Projects</a>
+      <a href="about.html">About</a>
+    </nav>
+  </header>
+  <main class="wrap">
+    <p class="eyebrow">Selected work / experiments</p>
+    <h1>Projects.</h1>
+    <p class="intro">A place for hands-on work in local models, efficient inference, retrieval, and the systems that connect software with hardware. Project write-ups will be added here.</p>
+    <div class="project-list" aria-label="Project areas">
+      <article class="project"><span class="number">01</span><h2>Local models</h2><p>Experiments with running and working with language models on constrained hardware.</p></article>
+      <article class="project"><span class="number">02</span><h2>Inference &amp; memory</h2><p>Work exploring quantization, memory use, and practical model efficiency.</p></article>
+      <article class="project"><span class="number">03</span><h2>Hardware &amp; systems</h2><p>Projects at the intersection of low-level software, controllers, and the physical world.</p></article>
+    </div>
+  </main>
+  <footer class="wrap"><a href="index.html">← Home</a><span>Machine learning, from the inside.</span><span>© <span id="year">2026</span></span></footer>
+  <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+</body>
+</html>
