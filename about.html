@@ -13,7 +13,7 @@
     :root { color-scheme: dark; --paper:#050505; --ink:#f5f5f5; --muted:#a1a1a1; --line:#303030; --width:1120px; }
     * { box-sizing:border-box; }
     html { scroll-behavior:smooth; }
-    body { margin:0; background:var(--paper); color:var(--ink); font-family:"IBM Plex Mono","SFMono-Regular",Consolas,monospace; -webkit-font-smoothing:antialiased; }
+    body { min-height:100vh; margin:0; display:flex; flex-direction:column; background:var(--paper); color:var(--ink); font-family:"IBM Plex Mono","SFMono-Regular",Consolas,monospace; -webkit-font-smoothing:antialiased; }
     a { color:inherit; }
     .wrap { width:min(var(--width),calc(100% - 64px)); margin-inline:auto; }
     .topbar { height:84px; display:flex; align-items:center; justify-content:space-between; border-bottom:1px solid var(--line); font-size:15px; }
@@ -22,6 +22,7 @@
     .nav a { text-decoration:underline; text-underline-offset:6px; }
     .eyebrow,.section-label,.index { color:var(--muted); font-family:"SFMono-Regular",Consolas,"Liberation Mono",monospace; font-size:12px; letter-spacing:.08em; }
     .eyebrow { margin:0 0 26px; }
+    main { flex:1; }
     h1 { margin:0 0 55px; font-size:clamp(44px,6vw,76px); font-weight:500; letter-spacing:-.06em; line-height:1.08; }
     .about { padding:80px 0 90px; display:grid; grid-template-columns:1fr 2fr; gap:50px; }
     .section-label { margin:7px 0 0; }
@@ -63,12 +64,7 @@
     </nav>
   </header>
   <main>
-    <div class="wrap" style="padding-top:86px">
-      <p class="eyebrow">A little about me</p>
-      <h1>Hey, I’m Karthik.</h1>
-    </div>
     <section class="wrap about">
-      <p class="section-label">01 / Background</p>
       <div class="about-copy">
         <p>Hey, I’m <strong>Karthik</strong>, an undergraduate student graduating from <strong>Anurag University</strong>.</p>
       </div>
