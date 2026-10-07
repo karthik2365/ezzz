@@ -48,7 +48,7 @@
       .focus { padding-bottom:70px; }
       .focus-item { grid-template-columns:38px 1fr; gap:12px 16px; }
       .focus-item p { grid-column:2; }
-      footer { gap:15px; }
+      footer { flex-wrap:wrap; gap:15px; }
     }
     @media(prefers-reduced-motion:reduce) { html { scroll-behavior:auto; } }
   </style>
@@ -70,7 +70,16 @@
       </div>
     </section>
   </main>
-  <footer class="wrap"><a href="index.html">← Home</a><span>Machine learning, from the inside.</span><span>© <span id="year">2026</span></span></footer>
-  <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+  <footer class="wrap"><a href="index.html">← Home</a><span>Machine learning, from the inside.</span><span>Portfolio views: <span id="portfolio-views">—</span></span><span>© <span id="year">2026</span></span></footer>
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+    const viewCount = document.getElementById('portfolio-views');
+    if (location.protocol === 'https:' && location.hostname.endsWith('github.io')) {
+      fetch('https://counterapi.com/api/karthik2365.github.io/view/ezzz-portfolio')
+        .then(response => response.ok ? response.json() : Promise.reject())
+        .then(data => { viewCount.textContent = new Intl.NumberFormat().format(data.value); })
+        .catch(() => { viewCount.textContent = '—'; });
+    }
+  </script>
 </body>
 </html>

@@ -11,3 +11,5 @@ A self-contained, responsive portfolio with no build tools or dependencies. `ind
 The site uses only HTML and CSS, so it works directly on GitHub Pages without a build step.
 
 The Home page includes a scroll-driven noise effect based on the sparse 3×3-block experiment. The panel starts black and progressively fills with noise as you scroll through the bio.
+
+The footer view counter uses the public CounterAPI service. It counts page views across the GitHub Pages site under one shared total, and does not run in local file previews. CounterAPI documents the no-signup public embed and API at <https://counterapi.com/>.

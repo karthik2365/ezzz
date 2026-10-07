@@ -30,7 +30,7 @@
       .topbar { height:68px; }
       .nav { gap:10px; font-size:10px; }
       main { padding-top:65px; }
-      footer { gap:15px; }
+      footer { flex-wrap:wrap; gap:15px; }
     }
   </style>
 </head>
@@ -49,7 +49,16 @@
     <h1>Blog.</h1>
     <p class="empty">No posts yet.</p>
   </main>
-  <footer class="wrap"><a href="index.html">← Home</a><span>Machine learning, from the inside.</span><span>© <span id="year">2026</span></span></footer>
-  <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+  <footer class="wrap"><a href="index.html">← Home</a><span>Machine learning, from the inside.</span><span>Portfolio views: <span id="portfolio-views">—</span></span><span>© <span id="year">2026</span></span></footer>
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+    const viewCount = document.getElementById('portfolio-views');
+    if (location.protocol === 'https:' && location.hostname.endsWith('github.io')) {
+      fetch('https://counterapi.com/api/karthik2365.github.io/view/ezzz-portfolio')
+        .then(response => response.ok ? response.json() : Promise.reject())
+        .then(data => { viewCount.textContent = new Intl.NumberFormat().format(data.value); })
+        .catch(() => { viewCount.textContent = '—'; });
+    }
+  </script>
 </body>
 </html>
