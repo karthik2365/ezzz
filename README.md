@@ -9,3 +9,5 @@ A self-contained, responsive portfolio with no build tools or dependencies. `ind
 3. Replace the `hello@example.com` address near the end of `index.html` with your email address. Add your name, project links, and social profiles when you’re ready.
 
 The site uses only HTML and CSS, so it works directly on GitHub Pages without a build step.
+
+The Home page includes a scroll-driven noise effect based on the sparse 3×3-block experiment. The panel starts black and progressively fills with noise as you scroll through the bio.

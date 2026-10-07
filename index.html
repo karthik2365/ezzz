@@ -77,11 +77,15 @@
     .scroll-link { flex: none; font-size: 12px; text-decoration: underline; text-underline-offset: 5px; }
     section { border-bottom: 1px solid var(--line); }
     .about { padding: 46px 0 90px; display: block; }
+    .home-about { min-height: 120vh; padding: 70px 0; display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(250px, .7fr); gap: clamp(40px, 8vw, 120px); align-items: start; }
     .section-label { margin: 7px 0 0; }
     .about-copy { max-width: 760px; margin-inline: 0; text-align: left; }
     .about-copy p { margin: 0 0 22px; color: #dedede; font-size: 16px; line-height: 1.85; }
     .about-copy p:last-child { margin-bottom: 0; }
     .about-copy strong { color: var(--ink); font-weight: 700; }
+    .noise-demo { position: sticky; top: 24vh; width: min(100%, 340px); justify-self: end; margin: 0; }
+    .noise-demo canvas { display: block; width: 100%; height: auto; border: 1px solid var(--line); filter: grayscale(1); image-rendering: pixelated; }
+    .noise-caption { display: flex; justify-content: space-between; gap: 12px; margin-top: 12px; color: var(--muted); font-size: 10px; letter-spacing: .06em; }
     .focus { padding: 90px 0 100px; }
     .focus-heading { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 43px; }
     h2 { margin: 0; font-size: clamp(32px, 4vw, 48px); font-weight: 500; letter-spacing: -.055em; }
@@ -110,8 +114,10 @@
       .hero { min-height: auto; padding: 86px 0 65px; }
       .hero-bottom { align-items: start; flex-direction: column; gap: 25px; margin-top: 34px; }
       .intro { font-size: 16px; }
-      .about { padding: 70px 0; grid-template-columns: 1fr; gap: 30px; }
+      .about { padding: 70px 0; }
+      .home-about { min-height: 125vh; grid-template-columns: 1fr; gap: 42px; }
       .about-copy p { font-size: 17px; }
+      .noise-demo { position: sticky; top: 22vh; width: min(100%, 320px); justify-self: start; }
       .focus { padding: 70px 0; }
       .focus-item { grid-template-columns: 38px 1fr; gap: 12px 16px; }
       .focus-item p { grid-column: 2; }
@@ -148,6 +154,10 @@
         <p>I spend a lot of time experimenting with <strong>LLMs and SLMs</strong>: running models locally, optimizing inference and memory use, exploring quantization and retrieval, and finding ways to make capable models work within limited hardware.</p>
         <p>I’m also fascinated by where <strong>software meets the physical world</strong>. I like experimenting with hardware controllers, low-level systems, and unconventional ML ideas—taking things apart, learning how they work, optimizing them, and sometimes building my own version to see how far I can push it.</p>
       </div>
+      <figure class="noise-demo">
+        <canvas id="noise-canvas" role="img" aria-label="A black panel gradually filled with custom 3 by 3 block noise"></canvas>
+        <figcaption class="noise-caption"><span>3×3 BLOCK NOISE</span><span id="noise-level">0%</span></figcaption>
+      </figure>
     </section>
 
   </main>
@@ -157,6 +167,88 @@
     <a href="#about">About →</a>
     <span>© <span id="year">2026</span></span>
   </footer>
-  <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    const canvas = document.getElementById('noise-canvas');
+    const context = canvas.getContext('2d', { willReadFrequently: true });
+    canvas.width = 416;
+    canvas.height = 406;
+    const original = context.createImageData(canvas.width, canvas.height);
+    for (let i = 3; i < original.data.length; i += 4) original.data[i] = 255;
+    const output = new Uint8ClampedArray(original.data);
+    let seed = 0;
+    const random = () => {
+      seed = (seed + 0x6D2B79F5) | 0;
+      let value = seed;
+      value = Math.imul(value ^ (value >>> 15), value | 1);
+      value ^= value + Math.imul(value ^ (value >>> 7), value | 61);
+      return ((value ^ (value >>> 14)) >>> 0) / 4294967296;
+    };
+    const gaussian = () => {
+      const u = Math.max(random(), Number.EPSILON);
+      return Math.sqrt(-2 * Math.log(u)) * Math.cos(2 * Math.PI * random());
+    };
+
+    const blocks = [];
+    for (let y = 0; y < canvas.height; y += 3) {
+      for (let x = 0; x < canvas.width; x += 3) {
+        const blockPixels = [];
+        for (let by = y; by < Math.min(y + 3, canvas.height); by++) {
+          for (let bx = x; bx < Math.min(x + 3, canvas.width); bx++) blockPixels.push(by * canvas.width + bx);
+        }
+        const minPixels = Math.min(3, blockPixels.length);
+        const count = minPixels + Math.floor(random() * (blockPixels.length - minPixels + 1));
+        for (let i = blockPixels.length - 1; i > 0; i--) {
+          const j = Math.floor(random() * (i + 1));
+          [blockPixels[i], blockPixels[j]] = [blockPixels[j], blockPixels[i]];
+        }
+        const selected = blockPixels.slice(0, count);
+        for (const pixel of selected) {
+          const offset = pixel * 4;
+          for (let channel = 0; channel < 3; channel++) {
+            output[offset + channel] = Math.max(0, Math.min(255, gaussian() * 60));
+          }
+        }
+        blocks.push(selected);
+      }
+    }
+    for (let i = blocks.length - 1; i > 0; i--) {
+      const j = Math.floor(random() * (i + 1));
+      [blocks[i], blocks[j]] = [blocks[j], blocks[i]];
+    }
+
+    const frame = context.createImageData(canvas.width, canvas.height);
+    const level = document.getElementById('noise-level');
+    let queued = false;
+    const update = () => {
+      queued = false;
+      const bounds = document.getElementById('about').getBoundingClientRect();
+      const start = window.innerHeight * 0.82;
+      const finish = window.innerHeight * 0.18;
+      const progress = Math.max(0, Math.min(1, (start - bounds.top) / (start - finish)));
+      frame.data.set(original.data);
+      const blockCount = Math.floor(progress * blocks.length);
+      for (let i = 0; i < blockCount; i++) {
+        for (const pixel of blocks[i]) {
+          const offset = pixel * 4;
+          frame.data[offset] = output[offset];
+          frame.data[offset + 1] = output[offset + 1];
+          frame.data[offset + 2] = output[offset + 2];
+        }
+      }
+      context.putImageData(frame, 0, 0);
+      level.textContent = `${Math.round(progress * 100)}%`;
+    };
+    const requestUpdate = () => {
+      if (!queued) {
+        queued = true;
+        requestAnimationFrame(update);
+      }
+    };
+    window.addEventListener('scroll', requestUpdate, { passive: true });
+    window.addEventListener('resize', requestUpdate);
+    requestUpdate();
+  </script>
 </body>
 </html>
