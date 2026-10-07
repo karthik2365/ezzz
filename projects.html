@@ -29,6 +29,7 @@
     .number { color:var(--muted); font-size:12px; }
     h2 { margin:0; font-size:19px; font-weight:500; letter-spacing:-.03em; }
     .project p { margin:0; color:var(--muted); font-size:13px; line-height:1.8; }
+    .repo-link { display:inline-block; margin-top:10px; color:var(--ink); text-decoration:underline; text-underline-offset:4px; }
     footer { min-height:74px; display:flex; align-items:center; justify-content:space-between; color:var(--muted); font-size:11px; }
     footer a { text-decoration:none; }
     @media(max-width:680px) {
@@ -57,9 +58,9 @@
     <p class="eyebrow">Selected work / experiments</p>
     <h1>Projects.</h1>
     <div class="project-list" aria-label="Project areas">
-      <article class="project"><span class="number">01</span><h2>Local Code RAG</h2><p>A local retrieval system that parses code into AST-based chunks and embeds them on-device. Uses sqlite-vec for vector search and a quantized Gemma 3 4B IT model for generation.</p></article>
+      <article class="project"><span class="number">01</span><h2>Local Code RAG</h2><p>A local retrieval system that parses code into AST-based chunks and embeds them on-device. Uses sqlite-vec for vector search and a quantized Gemma 3 4B IT model for generation.<br><a class="repo-link" href="https://github.com/karthik2365/sable" target="_blank" rel="noopener noreferrer">View repository ↗</a></p></article>
       <article class="project"><span class="number">02</span><h2>Blockwise Image Noise</h2><p>A custom noising formula that selects three random pixels in each 3×3 image block and applies noise to them.</p></article>
-      <article class="project"><span class="number">03</span><h2>Multi-round AI Interview</h2><p>A staged hiring workflow with resume screening, resume-aware technical questions, scenario and production problem-solving, and a final hiring committee. Each layer carries context and makes its own decisions; plain-text logs keep the process auditable. The committee reviews interview feedback and returns a Hire, Hold, or Reject decision.</p></article>
+      <article class="project"><span class="number">03</span><h2>Multi-round AI Interview</h2><p>A staged hiring workflow with resume screening, resume-aware technical questions, scenario and production problem-solving, and a final hiring committee. Each layer carries context and makes its own decisions; plain-text logs keep the process auditable. The committee reviews interview feedback and returns a Hire, Hold, or Reject decision.<br><a class="repo-link" href="https://github.com/karthik2365/interviewagent" target="_blank" rel="noopener noreferrer">View repository ↗</a></p></article>
       <article class="project"><span class="number">04</span><h2>Upcoming: LLM Fine-tuning on Microcontrollers</h2><p>Exploring how to fine-tune language models for microcontroller hardware.</p></article>
     </div>
   </main>
