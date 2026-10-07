@@ -113,6 +113,7 @@
     .contact { min-width: 135px; padding-bottom: 7px; border-bottom: 1px solid var(--ink); font-size: 14px; text-decoration: none; }
     footer { min-height: 74px; display: flex; align-items: center; justify-content: space-between; color: var(--muted); font-size: 11px; }
     footer a { text-decoration: none; }
+    .home-about, .focus { border-top: 1px solid var(--line); }
     @media (max-width: 680px) {
       .wrap { width: min(100% - 40px, var(--width)); }
       .topbar { height: 68px; }
@@ -150,11 +151,33 @@
         <a class="scroll-link" href="about.html">More about me →</a>
       </div>
     </div>
+
+    <section id="about" class="wrap about home-about">
+      <p class="section-label">01 / About</p>
+      <div class="about-copy">
+        <p>I’m drawn to <strong>machine learning from a systems perspective</strong>—not just using models, but understanding what makes them work and how far they can be pushed.</p>
+        <p>I spend a lot of time experimenting with <strong>LLMs and SLMs</strong>: running models locally, optimizing inference and memory use, exploring quantization and retrieval, and finding ways to make capable models work within limited hardware.</p>
+        <p>I’m also fascinated by where <strong>software meets the physical world</strong>. I like experimenting with hardware controllers, low-level systems, and unconventional ML ideas—taking things apart, learning how they work, optimizing them, and sometimes building my own version to see how far I can push it.</p>
+      </div>
+    </section>
+
+    <section id="focus" class="wrap focus">
+      <div class="focus-heading">
+        <h2>What I’m curious about</h2>
+        <span class="section-label">02 / Focus</span>
+      </div>
+      <div class="focus-list">
+        <article class="focus-item"><span class="index">01</span><h3>Small models, local inference</h3><p>Exploring what LLMs and SLMs can do on-device, and what it takes to make them useful.</p></article>
+        <article class="focus-item"><span class="index">02</span><h3>Efficiency under constraints</h3><p>Quantization, memory use, inference speed, and the trade-offs behind each optimization.</p></article>
+        <article class="focus-item"><span class="index">03</span><h3>Retrieval and model capability</h3><p>Finding better ways to connect compact models with the knowledge and context they need.</p></article>
+        <article class="focus-item"><span class="index">04</span><h3>Software meets hardware</h3><p>Hardware controllers, low-level systems, and experiments that bring ML into the physical world.</p></article>
+      </div>
+    </section>
   </main>
 
   <footer class="wrap">
     <span>Machine learning, from the inside.</span>
-    <a href="about.html">About →</a>
+    <a href="#about">About →</a>
     <span>© <span id="year">2026</span></span>
   </footer>
   <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
